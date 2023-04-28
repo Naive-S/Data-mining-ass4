@@ -15,7 +15,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # 加载数据集
-df2=pd.read_csv('./dataset/winequality/winequality-red.csv')
+df2=pd.read_csv('./dataset/winequality/winequality-red.csv',delimiter=';')
 
 X = df2.iloc[:, :-1]
 y = df2.iloc[:, -1]
@@ -24,17 +24,6 @@ print(X,y)
 # 划分训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(X.values, y.values, test_size=0.2, random_state=42)
 
-
-
-# 加载数据集
-df2=pd.read_csv('./dataset/winequality/winequality-red.csv',header=None)
-
-X = df2.iloc[:, :-1]
-y = df2.iloc[:, -1]
-
-
-# 划分训练集和测试集
-X_train2, X_test2, y_train2, y_test2 = train_test_split(X.values, y.values, test_size=0.2, random_state=42)
 
 print('开始训练')
 # 训练SVM模型
