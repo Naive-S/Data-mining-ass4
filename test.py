@@ -26,7 +26,7 @@ print('开始训练')
 model = SVC(kernel='linear', C=1)
 model.fit(X_train, y_train)
 print('模型训练结束')
-
+sda
 # 预测测试集类别
 y_pred = model.predict(X_test)
 print('预测结束')
