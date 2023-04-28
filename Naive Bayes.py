@@ -153,7 +153,6 @@ plt.title('Confusion Matrix(iris.data)')
 plt.show()
 
 # 绘制柱状图
-# 绘制多组MAE和RMSE的条形图
 fig, ax = plt.subplots()
 index = np.arange(5)
 bar_width = 0.35
