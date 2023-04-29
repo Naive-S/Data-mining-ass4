@@ -16,7 +16,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 # 加载数据集
 df = pd.read_csv('./dataset/wdbc/wdbc.data', header=None)
 
-# 去除第一列ID以及第二列标签列
 X = df.iloc[:, 2:]
 y = df.iloc[:, 1].apply(lambda x: 1 if x == 'B' else 0)
 print(X)
