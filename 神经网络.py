@@ -75,25 +75,98 @@ X = (X - np.mean(X, axis=0)) / np.std(X, axis=0)  # 标准化特征
 y = y.reshape(-1, 1)  # 转换标签为列向量
 n_samples, n_features = X.shape
 
+# 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # 定义超参数
 learning_rate = 0.1
 n_iterations = 1000
 
 # 创建神经网络并训练模型
 nn = NeuralNetwork(n_inputs=n_features, n_hidden=10, n_outputs=1)
-nn.train(X, y, n_iterations, learning_rate)
+nn.train(X_train, y_train, n_iterations, learning_rate)
 
 # # 计算评价指标
-y_pred = nn.predict(X)
+y_pred = nn.predict(X_test)
 
-accuracy = accuracy_score(y,y_pred)
-precision = precision_score(y, y_pred)
-recall = recall_score(y, y_pred)
-f1_1_1 = f1_score(y, y_pred, average='micro')
-f1_1_2 = f1_score(y, y_pred, average='macro')
+accuracy = accuracy_score(y_test,y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1_1_1 = f1_score(y_test, y_pred, average='micro')
+f1_1_2 = f1_score(y_test, y_pred, average='macro')
 print(f"Accuracy: {accuracy}")
 print("模型准确率：", accuracy)
 print("模型精确率：", precision)
 print("模型召回率：", recall)
 print("模型 F1 值(micro)：", f1_1_1)
 print("模型 F1 值(macro)：", f1_1_2)
+
+# 绘制混淆矩阵
+cm = confusion_matrix(y_test, y_pred)
+# 生成混淆矩阵热图
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, cmap='Blues')
+plt.xlabel('Predicted Labels')
+plt.ylabel('True Labels')
+plt.title('Confusion Matrix(wdbc.data)')
+plt.show()
+
+#
+# ################### 数据集winequality.data##############################
+# # 加载数据集
+# df2 = pd.read_csv('./dataset/winequality/winequality-red.csv', delimiter=';')
+#
+# X = df2.iloc[:, :-1].values
+# y = df2.iloc[:, -1].values
+#
+# # 划分训练集和测试集
+# X_train2, X_test2, y_train2, y_test2 = train_test_split(X, y, test_size=0.2)
+# # 训练SVM模型
+# model = SVC(kernel='linear')
+# model.fit(X_train2, y_train2)
+#
+# # 预测测试集类别
+# y_pred2 = model.predict(X_test2)
+#
+# # 计算模型的评价指标
+# accuracy2 = accuracy_score(y_test2, y_pred2)
+# precision2 = precision_score(y_test2, y_pred2, average='macro', zero_division=1)
+# recall2 = recall_score(y_test2, y_pred2, average='macro')
+# f1_2_1 = f1_score(y_test2, y_pred2, average='micro')
+# f1_2_2 = f1_score(y_test2, y_pred2, average='macro')
+#
+# print("模型准确率：", accuracy2)
+# print("模型精确率：", precision2)
+# print("模型召回率：", recall2)
+# print("模型 F1 值(micro)：", f1_2_1)
+# print("模型 F1 值(macro)：", f1_2_2)
+#
+# # 绘制混淆矩阵
+# cm = confusion_matrix(y_test2, y_pred2)
+# # 生成混淆矩阵热图
+# plt.figure(figsize=(8, 6))
+# sns.heatmap(cm, annot=True, cmap='Blues')
+# plt.xlabel('Predicted Labels')
+# plt.ylabel('True Labels')
+# plt.title('Confusion Matrix(winequality-red.csv)')
+# plt.show()
+#
+#
+# # 绘制柱状图
+# fig, ax = plt.subplots()
+# index = np.arange(5)
+# bar_width = 0.35
+# opacity = 0.8
+#
+# list1 = [accuracy, precision, recall, f1_1_1, f1_1_2]
+# list2 = [accuracy2, precision2, recall2, f1_2_1, f1_2_2]
+# rects1 = ax.bar(index, list1, bar_width, alpha=opacity, color='b', label='wdbc')
+# rects2 = ax.bar(index + bar_width, list2, bar_width, alpha=opacity, color='g', label='winequality-red')
+#
+# ax.set_xlabel('Iteration')
+# ax.set_ylabel('Error')
+# ax.set_title('Evaluation Indicators')
+# ax.set_xticks(index + bar_width / 2)
+# ax.set_xticklabels(('1', '2', '3', '4', '5'))
+# ax.legend()
+# plt.show()
