@@ -7,27 +7,29 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 
 class NeuralNetwork:
+    # 初始化函数，定义神经网络中的输入层、隐藏层和输出层节点数，并初始化权重和偏置
     def __init__(self, n_inputs, n_hidden, n_outputs):
-        # 初始化权重和偏差
         self.weights_1 = np.random.randn(n_inputs, n_hidden)
         self.bias_1 = np.zeros((1, n_hidden))
         self.weights_2 = np.random.randn(n_hidden, n_outputs)
         self.bias_2 = np.zeros((1, n_outputs))
 
+    # 定义sigmoid激活函数
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
+    # 定义前向传播函数
     def forward(self, X):
-        # 前向传播
         self.hidden_layer = self.sigmoid(np.dot(X, self.weights_1) + self.bias_1)
         self.output_layer = self.sigmoid(np.dot(self.hidden_layer, self.weights_2) + self.bias_2)
         return self.output_layer
 
+    # 定义sigmoid函数的导数
     def sigmoid_derivative(self, x):
         return x * (1 - x)
 
+    # 定义反向传播函数，更新权重和偏置
     def backward(self, X, y, output):
-        # 反向传播
         d_output = (output - y) * self.sigmoid_derivative(output)
         d_hidden = d_output.dot(self.weights_2.T) * self.sigmoid_derivative(self.hidden_layer)
         delta_weights_2 = self.hidden_layer.T.dot(d_output)
@@ -35,30 +37,25 @@ class NeuralNetwork:
         delta_weights_1 = X.T.dot(d_hidden)
         delta_bias_1 = np.sum(d_hidden, axis=0)
 
-        # 更新权重和偏置
         self.weights_2 -= learning_rate * delta_weights_2
         self.bias_2 -= learning_rate * delta_bias_2
         self.weights_1 -= learning_rate * delta_weights_1
         self.bias_1 -= learning_rate * delta_bias_1
 
+    # 定义训练函数，迭代n_iterations次，依次进行前向传播、反向传播和权重更新操作，并输出损失函数值
     def train(self, X, y, n_iterations):
         for i in range(n_iterations):
-            # 前向传播
             output = self.forward(X)
-
-            # 计算损失函数
             loss = -np.mean(y * np.log(output) + (1 - y) * np.log(1 - output))
-
-            # 反向传播并更新权重和偏置
             self.backward(X, y, output)
 
-            # 打印损失函数值
             if i % 100 == 0:
                 print(f"Loss after iteration {i}: {loss}")
 
+    # 定义预测函数，在输入数据集X上进行前向传播，并返回二元标签输出
     def predict(self, X):
-        # 预测
         return (self.forward(X) > 0.5).astype(int)
+
 
 
 # 加载wdbc数据集
