@@ -121,8 +121,6 @@ precision3 = precision_score(y_test, y_pred3, average='macro')
 recall3 = recall_score(y_test, y_pred3, average='macro')
 f13 = f1_score(y_test, y_pred3, average='macro')
 
-
-
 ########################################## 绘图 #############################################
 
 # 设置每个算法的性能指标
@@ -140,6 +138,7 @@ rects1 = ax.bar(x - width, RF_scores, width, label='RF')
 rects2 = ax.bar(x, AdaBoost_scores, width, label='AdaBoost')
 rects3 = ax.bar(x + width, Stacking_scores, width, label='Stacking')
 
+
 # 添加数据标签
 def autolabel(rects):
     for rect in rects:
@@ -150,6 +149,7 @@ def autolabel(rects):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
+
 autolabel(rects1)
 autolabel(rects2)
 autolabel(rects3)
@@ -159,14 +159,14 @@ ax.legend(loc='upper right')
 
 # 添加轴标签和标题
 ax.set_xticks(x)
-ax.set_xticklabels(['Accuracy', 'Precision', 'Recall', 'F1-score','Pre_Rec_F1'])
+ax.set_xticklabels(['Accuracy', 'Precision', 'Recall', 'F1-score', 'Pre_Rec_F1'])
 ax.set_ylabel('Score')
 ax.set_title('Comparison of Algorithms on wdbc Dataset')
 
 # 调整柱状图间距
-ax.set_xlim([-1.5*width, len(x) - width])
+ax.set_xlim([-1.5 * width, len(x) - width])
 fig.tight_layout()
-plt.ylim([0.5,1.1])
+plt.ylim([0.5, 1.1])
 
 # 显示图形
 plt.show()
