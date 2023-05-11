@@ -72,7 +72,7 @@ rf_scores = [accuracy, precision, recall, f1, pre_re_f1]
 ada_scores = [accuracy2, precision2, recall2, f12, pre_re_f12]
 
 # 创建柱状图
-fig, ax = plt.subplots(figsize=(8, 5))
+fig, ax = plt.subplots(figsize=(10, 8))
 bar_width = 0.35
 opacity = 0.8
 index = list(range(len(metrics)))
@@ -100,7 +100,7 @@ add_labels(rects2)
 # 添加轴标签和标题
 ax.set_xticks([i + bar_width / 2 for i in index])
 ax.set_xticklabels(metrics)
-plt.ylim([0.5, 1.2])
+plt.ylim([0.5, 1.1])
 
 # 添加图例
 ax.legend()
