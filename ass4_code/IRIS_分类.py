@@ -27,8 +27,8 @@ X_train, X_test, y_train, y_test = train_test_split(data.values, target.values, 
 
 ####################################### 随机森林 #########################################################
 
-# 创建随机森林模型，使用100棵决策树，每棵树的最大深度为4
-rf = RandomForestClassifier(n_estimators=100, max_depth=4)
+# 创建随机森林模型，使用100棵决策树，每棵树的最大深度为3
+rf = RandomForestClassifier(n_estimators=100, max_depth=3)
 
 # 训练模型
 rf.fit(X_train, y_train)
@@ -46,7 +46,7 @@ f1 = f1_score(y_test, y_pred, average='macro')
 ##################################### Adaboost（决策树基分类器） ##############################################
 # 构建AdaBoost分类器
 ada = AdaBoostClassifier(
-    estimator=DecisionTreeClassifier(max_depth=1),
+    estimator=DecisionTreeClassifier(max_depth=3),
     n_estimators=200,
     learning_rate=0.5
 )
