@@ -64,6 +64,8 @@ precision2 = precision_score(y_test, y_pred2, average='macro')
 recall2 = recall_score(y_test, y_pred2, average='macro')
 f12 = f1_score(y_test, y_pred2, average='macro')
 
+
+####################################### 绘图 ################################################################
 # 定义评价指标名称
 metrics = ['Accuracy', 'Precision (macro)', 'Recall (macro)', 'F1-score (macro)', 'Pre_Rec_F1(micro)']
 
