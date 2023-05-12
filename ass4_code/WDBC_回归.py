@@ -100,8 +100,6 @@ print('解释方差分数:', evs2)
 medae2 = median_absolute_error(y_test, y_pred2)
 print('中位绝对误差（MedAE）:', medae2)
 
-
-
 ################################################ 绘图 ##############################################
 # 将评价指标绘制在一张图上进行对比
 fig, ax = plt.subplots(figsize=(10, 6))
