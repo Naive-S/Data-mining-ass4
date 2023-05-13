@@ -38,7 +38,7 @@ y = data['diagnosis']
 
 # 将数据集划分为训练集和测试集
 X_trainval, X_test, y_trainval, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-X_train, X_val, y_train, y_val = train_test_split(X_trainval, y_trainval, test_size=0.25, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(X_trainval, y_trainval, test_size=0.2, random_state=42)
 
 ####################################### 随机森林 #########################################################
 
